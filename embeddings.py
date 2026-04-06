@@ -7,9 +7,6 @@ from insightface.app import FaceAnalysis
 from db import SessionLocal
 from models import FaceEmbedding
 
-# -------------------------------
-# Face model
-# -------------------------------
 app = FaceAnalysis(
     name="buffalo_l",
     root="./.insightface",
@@ -17,9 +14,7 @@ app = FaceAnalysis(
 )
 app.prepare(ctx_id=0, det_size=(640, 640))
 
-# -------------------------------
-# DB session
-# -------------------------------
+
 db = SessionLocal()
 
 image_dir = "./image"
@@ -29,9 +24,6 @@ for folder_name in os.listdir(image_dir):
     if not os.path.isdir(folder_path):
         continue
 
-    # -------------------------------
-    # Parse folder name: Name-Roll
-    # -------------------------------
     try:
         student_name, roll_number = folder_name.rsplit("-", 1)
     except ValueError:
@@ -54,15 +46,8 @@ for folder_name in os.listdir(image_dir):
         print(f"No face found for {folder_name}")
         continue
 
-    # -------------------------------
-    # EXACT CSV LOGIC
-    # -------------------------------
     avg_embedding = np.mean(embeddings, axis=0)
     avg_embedding = avg_embedding.tolist()
-
-    # -------------------------------
-    # Store / Update embedding
-    # -------------------------------
     record = (
         db.query(FaceEmbedding)
         .filter(FaceEmbedding.roll_number == roll_number)
@@ -80,6 +65,7 @@ for folder_name in os.listdir(image_dir):
         )
 
     db.commit()
-    print(f"Stored embedding for {student_name} ({roll_number})")
+    # print(f"Stored embedding for {student_name} ({roll_number})")
+    print(".",end="")
 
 db.close()

@@ -4,9 +4,9 @@ CREATE TABLE person (
 );
 
 INSERT INTO person (roll_number, name) VALUES
-('UU1', 'aashu'),
-('UU3', 'aman'),
-('UU19', 'swapnil');
+('UU1', 'Aashutosh'),
+('UU3', 'Aman'),
+('UU19', 'Swapnil');
 
 CREATE TABLE face_embedding (
     embedding_id SERIAL PRIMARY KEY,

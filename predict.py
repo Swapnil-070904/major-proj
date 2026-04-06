@@ -8,9 +8,9 @@ from sqlalchemy.exc import IntegrityError
 from db import SessionLocal
 from models import FaceEmbedding, Attendance, Person
 
-# --------------------------------
-# Load embeddings FROM DB (CSV style)
-# --------------------------------
+# ------------------------
+# Load embeddings FROM DB
+# ------------------------
 db = SessionLocal()
 
 embeddings = {}
@@ -27,9 +27,6 @@ for emb, person in records:
 
 print(f"Loaded embeddings for {len(embeddings)} students from DB")
 
-# --------------------------------
-# Face model
-# --------------------------------
 app = FaceAnalysis(
     name="buffalo_l",
     root="./.insightface",
@@ -37,16 +34,12 @@ app = FaceAnalysis(
 )
 app.prepare(ctx_id=0, det_size=(640, 640))
 
-# --------------------------------
-# Attendance state (SAME AS CSV)
-# --------------------------------
 attendance_marked = set()
 THRESHOLD = 0.6
 USE_WEBCAM = 1
 
-# --------------------------------
-# IMAGE MODE (testing)
-# --------------------------------
+# IMAGE MODE
+
 if not USE_WEBCAM:
     # img_path = r"D:\cutie\car\lw\IMG20240809192124.jpg"
     # frame = cv2.imread(img_path)
@@ -91,9 +84,8 @@ if not USE_WEBCAM:
     # cv2.destroyAllWindows()
     pass
 
-# --------------------------------
-# WEBCAM MODE (SAME CSV LOGIC)
-# --------------------------------
+# WEBCAM MODE
+
 else:
     cap = cv2.VideoCapture(0)
 
