@@ -9,7 +9,7 @@ from models import FaceEmbedding
 app = FaceAnalysis(
     name="buffalo_l",
     root="./.insightface",
-    providers=["CPUExecutionProvider"]
+    providers=["CUDAExecutionProvider"]
 )
 app.prepare(ctx_id=0, det_size=(640, 640))
 
