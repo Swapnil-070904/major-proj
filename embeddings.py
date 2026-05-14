@@ -64,7 +64,6 @@ for folder_name in os.listdir(image_dir):
         )
 
     db.commit()
-    # print(f"Stored embedding for {student_name} ({roll_number})")
-    print(".",end="")
+    print(f"Stored data for {student_name} ({roll_number})")
 
 db.close()

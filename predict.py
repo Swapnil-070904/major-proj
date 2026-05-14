@@ -82,7 +82,7 @@ while True:
 
         if not is_real:
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
-            cv2.putText(frame, "Spoof", (x1, y1 - 10),
+            cv2.putText(frame, "Fake", (x1, y1 - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
             continue
 
@@ -105,13 +105,13 @@ while True:
                 try:
                     db.add(Attendance(roll_number=roll))
                     attendance_marked.add(best_match)
-                    print(f"✅ Attendance marked: {name} ({roll})")
+                    print(f"Attendance marked: {name} ({roll})")
                 except IntegrityError:
                     db.rollback()
 
             # draw
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            cv2.putText(frame, f"{name} ({best_score:.2f})",
+            cv2.putText(frame, f"{name} ({roll})",
                         (x1, y1 - 10),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         0.7, (0, 255, 0), 2)
